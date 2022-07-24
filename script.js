@@ -31,20 +31,53 @@ function generatePassword() {
   if(!passwordLength) {
     alert("Must be between 8 -128 characters.")
   }
-  
+  // confirm length
   else if (passwordLength <= 7 || passwordLength >= 129) {
     alert("Password length must be between 8 - 128 characters long.");
     var passwordLength = (prompt("Please enter a value between 8 - 128 characters."));
-  
+  // confirm criteria
   } else {
     confirmLower = confirm("Include lowercase characters?");
     confirmUpper = confirm("Include uppercase characters?");
     confirmNumeric = confirm("Include numbers?");
     confirmSpecial = confirm("Include special characters?");
+  };
+
+  if (!confirmLower && !confirmUpper && !confirmNumeric && !confirmSpecial) {
+    alert("You must choose at least one criterion.");
+    confirmLower = confirm("Include lowercase characters?");
+    confirmUpper = confirm("Include uppercase characters?");
+    confirmNumeric = confirm("Include numbers?");
+    confirmSpecial = confirm("Include special characters?");
+  }
+// user choices here
+  var passwordCharacters = [];
+
+  if (confirmLower) {
+    passwordCharacters = passwordCharacters.concat(lowerCase)
   }
 
+  if (confirmUpper) {
+    passwordCharacters = passwordCharacters.concat(upperCase)
+  }
 
+  if (confirmNumeric) {
+    passwordCharacters = passwordCharacters.concat(numeric)
+  }
 
+  if (confirmSpecial) {
+    passwordCharacters = passwordCharacters.concat(special)
+  }
+
+  console.log(passwordCharacters);
+// generate the password
+  var yourPassword = "";
   
-  
+  for (var i = 0; i < passwordLength; i++) {
+    yourpassword = yourPassword + passwordCharacters[Math.floor(Math.random() * passwordCharacters.length)];
+    console.log(yourPassword)
+  }
+  return yourPassword
 }
+
+  
